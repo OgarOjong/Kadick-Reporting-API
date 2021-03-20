@@ -83,11 +83,7 @@ router.post("/login", async (req, res) => {
       .status(422)
       .send(APIResponse(422, false, "invalid  Password", null));
   }
-  //Create and assign token
-  // const { user.id, user.fullName, user.userCode, user.email} = user;
-  // const obj = {};
-  // // obj.${user._id};
-  // obj.user.fullName;
+
   const token = jwt.sign({ _id: user.id }, process.env.TOKEN_SECRET);
   // res.header("auth-token", token).send(token);
   var { id, fullName, userCode, email, phoneNumber } = user;
