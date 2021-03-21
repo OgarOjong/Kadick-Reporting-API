@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const MONGODB_URI = process.env.CONNECTION_STRING;
+const MONGODB_URI = process.env.CONN_STRING;
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
