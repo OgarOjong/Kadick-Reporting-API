@@ -2,9 +2,9 @@
   "name": "newapi",
   "version": "1.0.0",
   "description": "kadick reporting app api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node app.js"
   },
   "author": "ojong emmanuel",
   "license": "ISC",
