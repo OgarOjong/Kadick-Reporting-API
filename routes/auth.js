@@ -32,7 +32,9 @@ router.post("/register", async (req, res) => {
   const userExist = await User.findOne({ userCode: req.body.userCode });
   const EmailExist = await User.findOne({ email: req.body.email });
   if (userExist || EmailExist) {
-    return res.json(APIResponse(422, false, "User Exist in DB", null));
+    return res
+      .status(422)
+      .send(APIResponse(422, false, "User Exist in DB", null));
   }
 
   //Hash Password
@@ -95,11 +97,12 @@ router.post("/login", async (req, res) => {
     userCode: userCode,
     email: email,
     phoneNumber: phoneNumber,
-    token: token,
+    auth_token: token,
   };
 
   return res
-    .header("auth-token", token)
+    .header("auth_token", token)
+    .status(201)
     .send(APIResponseToks(201, true, newUser));
 
   // res.send(APIResponse(201, true, "logged IN", user.userCode));
