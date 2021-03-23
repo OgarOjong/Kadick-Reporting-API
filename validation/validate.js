@@ -9,6 +9,8 @@ const registerValidation = (data) => {
       .regex(/^([\w]{3,})+\s+([\w\s]{3,})+$/i),
 
     userCode: Joi.string().max(10).required(),
+    state: Joi.string().required(),
+    street: Joi.string().required(),
 
     email: Joi.string().min(6).email().required(),
 

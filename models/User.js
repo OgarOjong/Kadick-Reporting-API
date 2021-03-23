@@ -21,6 +21,14 @@ const userSchema = new mongoose.Schema({
     min: 11,
     required: true,
   },
+  state: {
+    type: String,
+    required: true,
+  },
+  street: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     min: 6,
