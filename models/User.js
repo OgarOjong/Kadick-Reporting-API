@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
+const Report = require("../models/Report");
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   fullName: {
     type: String,
     required: true,
@@ -35,6 +37,7 @@ const userSchema = new mongoose.Schema({
     max: 50,
     required: true,
   },
+  reports: [{ type: Schema.Types.ObjectId, ref: "Report" }],
 
   date: {
     type: Date,
