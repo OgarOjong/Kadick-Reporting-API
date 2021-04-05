@@ -6,6 +6,7 @@ const catchAsync = require("../utils/catchAsync");
 const {
   registerValidation,
   loginValidation,
+  reportValidation,
 } = require("../validation/validate");
 const bcrypt = require("bcryptjs");
 const Joi = require("@hapi/joi");
@@ -32,7 +33,7 @@ router.post(
       return res.status(422).send(APIResponse(422, false, reg_message, null));
     }
     //check if user exist in DB before sending
-    console.log(req.body);
+    // console.log(req.body);
     const userExist = await User.findOne({ userCode: req.body.userCode });
     const EmailExist = await User.findOne({ email: req.body.email });
     if (userExist || EmailExist) {
@@ -114,6 +115,12 @@ router.post("/login", async (req, res) => {
     .header("auth_token", token)
     .status(201)
     .send(APIResponseToks(201, true, newUser));
+});
+
+router.post("/test", (req, res, next) => {
+  console.log("HIT!!");
+  const { error } = reportValidation(req.body);
+  res.send(error);
 });
 
 module.exports = router;

@@ -16,11 +16,11 @@ const reportSchema = new Schema({
   },
   mobileNumber: {
     type: String,
-    required: true,
   },
   image: {
-    types: String,
+    type: String,
   },
+
   date: {
     type: Date,
     default: Date.now(),

@@ -30,5 +30,19 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
+const reportValidation = (data) => {
+  const schema = Joi.object({
+    visitCategory: Joi.string().required().valid("Prospect", "Agent", "Return"),
+    remark: Joi.string().max(255).required(),
+    agentCode: Joi.string().allow(""),
+    mobileNumber: Joi.string().allow(""),
+    fmlocation: Joi.string().required(),
+    obtainedLocation: Joi.string().required(),
+    obtainLocString: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.reportValidation = reportValidation;
