@@ -4,3 +4,5 @@ report.txt
 test.txt
 /routes/test.js
 UserSchema.txt
+/tmp
+/node_modules
