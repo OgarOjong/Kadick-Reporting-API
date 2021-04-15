@@ -32,11 +32,12 @@ const loginValidation = (data) => {
 
 const reportValidation = (data) => {
   const schema = Joi.object({
+    name: Joi.string().required(),
     visitCategory: Joi.string().required().valid("Prospect", "Agent", "Return"),
     remark: Joi.string().max(255).required(),
     agentCode: Joi.string().allow(""),
-    mobileNumber: Joi.string().allow(""),
-    fmlocation: Joi.string().required(),
+    mobileNumber: Joi.string().required(),
+    fmLocation: Joi.string().required(),
     obtainedLocation: Joi.string().required(),
     obtainLocString: Joi.string().required(),
   });

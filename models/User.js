@@ -37,7 +37,6 @@ const userSchema = new Schema({
     max: 50,
     required: true,
   },
-  reports: [{ type: Schema.Types.ObjectId, ref: "Report" }],
 
   date: {
     type: Date,

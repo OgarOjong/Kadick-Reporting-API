@@ -1,8 +1,23 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
-const Schema = mongoose.Schema;
+// const GeoSchema = require("../models/GeoSchema");
+const { Schema } = mongoose;
+
+const Geoschema = new Schema({
+  type: {
+    type: String,
+    default: "Point",
+  },
+  coordinates: {
+    type: [Number],
+  },
+});
 
 const reportSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   visitCategory: {
     type: String,
     enum: ["Prospect", "Agent", "Return"],
@@ -16,6 +31,7 @@ const reportSchema = new Schema({
   },
   mobileNumber: {
     type: String,
+    required: true,
   },
   image: {
     type: String,
@@ -25,12 +41,14 @@ const reportSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-  fmlocation: {
+  fmLocation: {
     type: String,
   },
   obtainedLocation: {
     type: String,
+    required: true,
   },
+
   obtainLocString: {
     type: String,
   },

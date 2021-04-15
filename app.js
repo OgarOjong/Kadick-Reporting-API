@@ -8,7 +8,7 @@ dotenv.config();
 const fileupload = require("express-fileupload");
 const bodyParser = require("body-parser");
 
-const MONGODB_URI = process.env.CONN_STRING;
+const MONGODB_URI = process.env.CONNECTION_STRING;
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -50,7 +50,7 @@ const reportRoute = require("./routes/report");
 
 //Defining middleware for auth route
 app.use("/api/user", authRoute);
-app.use("/api/report", reportRoute);
+app.use("/api/user/report", reportRoute);
 // app.use("/api", crudRoute);
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "SOMETHING WENT WRONG !!" } = err;
