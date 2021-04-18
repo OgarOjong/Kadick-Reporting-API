@@ -8,7 +8,7 @@ dotenv.config();
 const fileupload = require("express-fileupload");
 const bodyParser = require("body-parser");
 
-const MONGODB_URI = process.env.CONNECTION_STRING;
+const MONGODB_URI = process.env.CONN_STRING;
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,

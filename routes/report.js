@@ -10,6 +10,7 @@ var fileupload = require("express-fileupload");
 const { APIResponse, APIResponseToks } = require("../models/APIResponse");
 const { storage, cloudinary } = require("../cloudinary");
 const { isValidCords } = require("../validation/coordinateValidation");
+const moment = require("moment");
 
 const refID = mongoose.Types.ObjectId;
 
@@ -20,6 +21,18 @@ router.get("/", verifyToken, async (req, res, next) => {
   // const here = await User.findById(_id);
   const userReport = await Report.find({});
   res.send(userReport);
+  next();
+});
+
+router.get("/today", (req, res) => {
+  console.log("HIT !!");
+  // start today
+  var start = moment().startOf("day").fromNow();
+  // end today
+  var end = moment().endOf("day").fromNow();
+  console.log(start);
+  console.log(end);
+  res.send(start);
 });
 
 router.get("/fm", verifyToken, async (req, res, next) => {
@@ -32,6 +45,7 @@ router.get("/fm", verifyToken, async (req, res, next) => {
   });
 
   res.send(userReport);
+  next();
 });
 
 router.post("/new", verifyToken, async (req, res, next) => {
@@ -131,6 +145,7 @@ router.post("/new", verifyToken, async (req, res, next) => {
       res.send("sent!!");
     }
   }
+  next();
 });
 
 module.exports = router;
