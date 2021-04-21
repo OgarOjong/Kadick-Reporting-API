@@ -117,10 +117,4 @@ router.post("/login", async (req, res) => {
     .send(APIResponseToks(201, true, newUser));
 });
 
-router.post("/test", (req, res, next) => {
-  console.log("HIT!!");
-  const { error } = reportValidation(req.body);
-  res.send(error);
-});
-
 module.exports = router;

@@ -44,6 +44,14 @@ const reportValidation = (data) => {
   return schema.validate(data);
 };
 
+const seenValidation = (data) => {
+  const schema = Joi.object({
+    lastSeen: Joi.string().required().trim(),
+  });
+  return schema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.reportValidation = reportValidation;
+module.exports.seenValidation = seenValidation;

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const verifyToken = require("../utils/verifyToken");
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
-const { reportValidation } = require("../validation/validate");
+const { reportValidation, seenValidation } = require("../validation/validate");
 const Report = require("../models/Report");
 const multer = require("multer");
 const User = require("../models/User");
@@ -144,6 +144,40 @@ router.post("/new", verifyToken, async (req, res, next) => {
       console.log(e);
       res.send("sent!!");
     }
+  }
+  next();
+});
+
+router.put("/lastseen", verifyToken, async (req, res, next) => {
+  const user = await req.user;
+  const { _id: id } = user;
+  const { error } = seenValidation(req.body);
+
+  if (error) {
+    err_message = error.details[0].message;
+    return res.status(400).send(APIResponse(400, false, err_message, null));
+  }
+  const { lastSeen } = await req.body;
+  try {
+    const newUpdate = await User.findByIdAndUpdate(
+      id,
+      {
+        lastSeen: lastSeen,
+      },
+      {
+        new: true,
+      }
+    );
+
+    const tu = await newUpdate.save();
+    // console.log(tu);
+    return res
+      .status(400)
+      .send(
+        APIResponse(201, true, "Last seen updated successfuly", tu.lastSeen)
+      );
+  } catch (e) {
+    return res.status(400).send(APIResponse(400, false, e, null));
   }
   next();
 });

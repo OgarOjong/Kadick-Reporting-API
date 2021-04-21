@@ -37,6 +37,10 @@ const userSchema = new Schema({
     max: 50,
     required: true,
   },
+  lastSeen: {
+    type: String,
+    default: "EMPTY",
+  },
 
   date: {
     type: Date,
