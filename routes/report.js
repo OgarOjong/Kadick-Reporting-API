@@ -151,12 +151,21 @@ router.post("/new", verifyToken, async (req, res, next) => {
 router.put("/lastseen", verifyToken, async (req, res, next) => {
   const user = await req.user;
   const { _id: id } = user;
+  // console.log(user);
+  const userExist = await User.findOne({ _id: id });
+  // console.log(userExist);
+  if (!userExist) {
+    return res
+      .status(400)
+      .send(APIResponse(400, false, "user not found!!!", null));
+  }
   const { error } = seenValidation(req.body);
 
   if (error) {
     err_message = error.details[0].message;
     return res.status(400).send(APIResponse(400, false, err_message, null));
   }
+
   const { lastSeen } = await req.body;
   try {
     const newUpdate = await User.findByIdAndUpdate(
@@ -169,17 +178,18 @@ router.put("/lastseen", verifyToken, async (req, res, next) => {
       }
     );
 
-    const tu = await newUpdate.save();
-    // console.log(tu);
+    const userlastSeen = await newUpdate.save();
+
+    var { fullName, userCode } = userlastSeen;
+    const tu = { fullName, userCode, lastSeen };
+
     return res
       .status(400)
-      .send(
-        APIResponse(201, true, "Last seen updated successfuly", tu.lastSeen)
-      );
+      .send(APIResponse(201, true, "Last seen updated successfuly", tu));
   } catch (e) {
-    return res.status(400).send(APIResponse(400, false, e, null));
+    console.log(e);
+    return res.status(400).send(APIResponse(400, false, "Error"));
   }
-  next();
 });
 
 module.exports = router;
