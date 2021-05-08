@@ -5,8 +5,8 @@ dotenv.config();
 
 cloudinary.config({
   cloud_name: "onethought",
-  api_key: "124876352141223",
-  api_secret: "2aXk0VhGMG3rjF2XXwFrYtxbIrY",
+  api_key: "",
+  api_secret: "",
 });
 
 const storage = new CloudinaryStorage({
